@@ -21,10 +21,11 @@
         }
 
         /* 修改1：移除Logo最大宽度限制 */
-        .course-logo {
+       .platform-card:first-child .course-logo {
             width: 100%;
-            margin: 20px auto 40px;
             display: block;
+            margin: 0 0 20px; /* 移除上下边距 */
+            border-radius: 8px 8px 0 0;
         }
 
         .platform-card {
@@ -33,6 +34,7 @@
             padding: 25px;
             margin-bottom: 25px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
         }
 
         /* 修改3：安卓列表对齐修正 */
@@ -95,10 +97,11 @@
 </head>
 <body>
     <!-- 课程Logo -->
-    <img src="hhh_logo.png" alt="关系中的奇迹课程" class="course-logo">
+    
 
     <!-- 安卓操作指南 -->
     <div class="platform-card">
+        <img src="hhh_logo.png" alt="关系中的奇迹课程" class="course-logo">
         <h2>📱 安卓设备操作指南</h2>
         <ol class="step-list android-step">
             <li><strong>使用浏览器打开</strong>本页面 → <strong>点击下载</strong>按钮</li>
