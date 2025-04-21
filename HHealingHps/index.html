@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关系中的奇迹课程订阅</title>
+    <style>
+        :root {
+            --ios-blue: #007AFF;
+            --ios-gray1: #F5F5F7;
+            --ios-gray6: #1D1D1F;
+            --ios-red: #FF3B30;
+        }
+
+        body {
+            font-family: -apple-system, PingFang SC, sans-serif;
+            background: var(--ios-gray1);
+            color: var(--ios-gray6);
+            margin: 0;
+            padding: 16px;
+        }
+
+        .course-logo {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .wechat-card {
+            background: #FFEEED;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid var(--ios-red);
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .ios-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--ios-blue);
+            color: white !important;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: none;
+            animation: toast 2s ease;
+        }
+
+        @keyframes toast {
+            0% { opacity: 0; bottom: 20px }
+            20% { opacity: 1; bottom: 32px }
+            80% { opacity: 1; bottom: 32px }
+            100% { opacity: 0; bottom: 20px }
+        }
+    </style>
+</head>
+<body>
+    <!-- 课程Logo（替换src为实际URL） -->
+    <img src="YOUR-LOGO-URL" alt="关系中的奇迹课程" class="course-logo">
+
+    <!-- 微信提示 -->
+    <div class="wechat-card" id="wechatNotice">
+        <h3>⚠️ 微信环境操作提示</h3>
+        <p>1. 点击右上角 <strong>•••</strong> → 在浏览器打开<br>
+           2. 使用系统浏览器完成操作</p>
+    </div>
+
+    <!-- 安卓平台 -->
+    <div class="platform-card">
+        <h2>📱 安卓设备指南</h2>
+        <button class="ios-button" onclick="handleDownload()">
+            ↓ 下载日历文件
+        </button>
+        <h3>操作步骤：</h3>
+        <p>1. 浏览器打开页面 → 点击下载<br>
+           2. 在文件管理中打开 .ics 文件<br>
+           3. 选择「用日历应用打开」</p>
+    </div>
+
+    <!-- 苹果平台 -->
+    <div class="platform-card">
+        <h2> 苹果设备指南</h2>
+        <button class="ios-button" onclick="copySubscriptionLink()">
+            ⎘ 复制订阅链接
+        </button>
+        <h3>操作步骤：</h3>
+        <p>1. 打开「日历」应用 → 点击「日历」<br>
+           2. 选择「添加订阅日历」<br>
+           3. 粘贴复制的链接</p>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // 环境检测
+        const isWeChat = /micromessenger/i.test(navigator.userAgent)
+        const isAndroid = /android/i.test(navigator.userAgent)
+
+        // 微信提示控制
+        if(!isAndroid) document.getElementById('wechatNotice').remove()
+
+        // 下载处理
+        function handleDownload() {
+            if(isWeChat && isAndroid) {
+                showToast('请使用浏览器打开')
+                return
+            }
+            window.location.href = 'course.ics'
+        }
+
+        // 复制订阅链接
+        function copySubscriptionLink() {
+            const link = 'webcal://YOUR-DOMAIN.vercel.app/course.ics'
+            navigator.clipboard.writeText(link).then(() => {
+                showToast('✅ 链接已复制')
+            }).catch(() => {
+                prompt('请手动复制链接', link)
+            })
+        }
+
+        // 显示提示
+        function showToast(text) {
+            const toast = document.getElementById('toast')
+            toast.textContent = text
+            toast.style.display = 'block'
+            setTimeout(() => toast.style.display = 'none', 2000)
+        }
+    </script>
+</body>
+</html>
