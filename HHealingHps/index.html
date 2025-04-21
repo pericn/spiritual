@@ -22,10 +22,11 @@
 
         /* 修改1：移除Logo最大宽度限制 */
        .platform-card:first-child .course-logo {
-            width: 100%;
+            margin: -25px -25px 20px -25px; /* 抵消卡片padding */
+            width: calc(100% + 50px); /* 撑满卡片宽度 */
             display: block;
-            margin: 0 0 20px; /* 移除上下边距 */
-            border-radius: 8px 8px 0 0;
+            object-fit: cover; /* 保持图片比例 */
+            border-radius: 14px 14px 0 0;
         }
 
         .platform-card {
