@@ -3,156 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关系中的奇迹课程订阅</title>
+    <title>关系中的奇迹课程订阅指南</title>
     <style>
         :root {
-            --ios-blue: #02B0A6;
-            --ios-gray1: #F5F5F7;
-            --ios-gray6: #1D1D1F;
-            --ios-red: #FF3B30;
+            --primary-color: #02B0A6;
+            --ios-red: #FF2D55;
+            --background: #F5F5F7;
+            --card-background: #FFFFFF;
         }
 
         body {
             font-family: -apple-system, PingFang SC, sans-serif;
-            background: var(--ios-gray1);
-            color: var(--ios-gray6);
+            background: var(--background);
+            color: #1D1D1F;
             margin: 0;
-            padding: 16px;
+            padding: 20px;
         }
 
+        /* 修改1：移除Logo最大宽度限制 */
         .course-logo {
             width: 100%;
-            border-radius: 12px 12px 0 0;
-            margin: 20px auto -20px auto;
+            margin: 20px auto 40px;
             display: block;
         }
 
-        .wechat-card {
-            background: #FFEEED;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-            border: 1px solid var(--ios-red);
-        }
-
         .platform-card {
-            background: white;
+            background: var(--card-background);
             border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.05);
         }
 
+        /* 修改3：安卓列表对齐修正 */
+        .step-list {
+            line-height: 1.8;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .step-list li {
+            margin-bottom: 15px;
+        }
+
+        .ios-step strong {
+            color: var(--ios-red);
+            font-weight: 600;
+        }
+
+        .android-step strong {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* 修改1：保持苹果按钮规范仅修改颜色 */
         .ios-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--ios-blue);
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--primary-color) !important;
             color: white !important;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 500;
+            transition: opacity 0.3s;
+            margin: 12px 0;
             border: none;
             cursor: pointer;
             font-size: 17px;
+            -webkit-appearance: none;
         }
 
-        .toast {
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            display: none;
-            animation: toast 2s ease;
+        .ios-button:active {
+            opacity: 0.7;
         }
 
-        @keyframes toast {
-            0% { opacity: 0; bottom: 20px }
-            20% { opacity: 1; bottom: 32px }
-            80% { opacity: 1; bottom: 32px }
-            100% { opacity: 0; bottom: 20px }
+        .warning-box {
+            color: var(--ios-red);
+            margin: 20px 0 0;
+            padding: 15px;
+            border-left: 4px solid var(--ios-red);
+            background: #FFF0F1;
+            border-radius: 6px;
+        }
+
+        /* 新增：安卓列表对齐修正 */
+        .android-step .warning-box {
+            margin-left: -20px;
+            margin-right: -5px;
         }
     </style>
 </head>
 <body>
-    <!-- 课程Logo（替换src为实际URL） -->
+    <!-- 课程Logo -->
     <img src="hhh_logo.png" alt="关系中的奇迹课程" class="course-logo">
 
-    <!-- 微信提示 -->
-    <div class="wechat-card" id="wechatNotice">
-        <h3>⚠️ 微信环境操作提示</h3>
-        <p>1. 点击右上角 <strong>•••</strong> → 在浏览器打开<br>
-           2. 使用系统浏览器完成操作</p>
-    </div>
-
-    <!-- 安卓平台 -->
+    <!-- 安卓操作指南 -->
     <div class="platform-card">
-        <h2>📱 安卓设备指南</h2>
-        <button class="ios-button" onclick="handleDownload()">
-            ↓ 下载日历文件
-        </button>
-        <h3>操作步骤：</h3>
-        <p>1. 浏览器打开页面 → 点击下载<br>
-           2. 在文件管理中打开 .ics 文件<br>
-           3. 选择「用日历应用打开」<br>
-           4. 根据提示完成订阅<br>
-              （如果需要日历提醒，请检查订阅页面中是否有类似「移除提醒」的设置并确保其关闭）</p>
+        <h2>📱 安卓设备操作指南</h2>
+        <ol class="step-list android-step">
+            <li><strong>使用浏览器打开</strong>本页面 → <strong>点击下载</strong>按钮</li>
+            <li>在手机<strong>文件管理器</strong>中找到下载的 .ics 文件</li>
+            <li><strong>长按文件</strong> → 选择<strong>「用日历应用打开」</strong></li>
+            <li>根据提示完成订阅
+                <div class="warning-box">
+                    如需接收提醒：在日历应用的<strong>订阅设置</strong>中<br>
+                    确认已开启<strong>「提醒通知」</strong>功能
+                </div>
+            </li>
+        </ol>
+        <button class="ios-button" onclick="handleDownload()">⎘ 下载日历文件</button>
     </div>
 
-    <!-- 苹果平台 -->
+    <!-- 苹果操作指南 -->
     <div class="platform-card">
-        <h2> 苹果设备指南</h2>
-        <button class="ios-button" onclick="copySubscriptionLink()">
-            ⎘ 复制订阅链接
-        </button>
-        <h3>操作步骤：</h3>
-        <p>1. 打开「日历」应用 → 点击页面正下方的「日历」文字<br>
-           2. 选择↙️左下角「添加订阅日历」<br>
-           3. 粘贴复制的链接，并点击「订阅」按钮<br>
-           4. 在弹出页面中的最底部，点击「订阅详细信息」，关闭「移除提醒」开关<br>
-           5. 返回，并点击右上角「添加」</p>
+        <h2> 苹果设备操作指南</h2>
+        <ol class="step-list ios-step">
+            <li>打开<strong>「日历」应用</strong> → 点击底部<strong>「日历」</strong>标签</li>
+            <li>选择左下角<strong>「添加订阅日历」</strong>选项</li>
+            <li>粘贴复制的链接 → 点击<strong>「订阅」按钮</strong></li>
+            <li>在订阅页面底部点击<strong>「订阅详细信息」</strong></li>
+            <li>关闭<strong>「移除提醒」</strong>开关 → 返回点击<strong>「添加」</strong></li>
+        </ol>
+        <button class="ios-button" onclick="copySubscriptionLink()">⎘ 复制订阅链接</button>
+        <div class="warning-box">
+            <strong>重要提示：</strong>必须关闭<strong>「移除提醒」</strong>开关<br>
+            才能正常接收课程提醒通知
+        </div>
     </div>
-
-    <div id="toast" class="toast"></div>
 
     <script>
-        // 环境检测
-        const isWeChat = /micromessenger/i.test(navigator.userAgent)
-        const isAndroid = /android/i.test(navigator.userAgent)
-
-        // 微信提示控制
-        if(!isAndroid) document.getElementById('wechatNotice').remove()
-
-        // 下载处理
+        // 下载处理函数
         function handleDownload() {
-            if(isWeChat && isAndroid) {
-                showToast('请使用浏览器打开')
-                return
+            if(/micromessenger/i.test(navigator.userAgent)) {
+                alert('请使用浏览器打开本页面进行下载');
+                return;
             }
-            window.location.href = 'course.ics'
+            window.location.href = 'course.ics';
         }
 
         // 复制订阅链接
         function copySubscriptionLink() {
-            const link = 'webcal://spiritual-orca.vercel.app/course.ics'
+            const link = 'webcal://guanxi.vercel.app/course.ics';
             navigator.clipboard.writeText(link).then(() => {
-                showToast('✅ 链接已复制')
+                alert('订阅链接已复制，请粘贴到日历应用中');
             }).catch(() => {
-                prompt('请手动复制链接', link)
-            })
-        }
-
-        // 显示提示
-        function showToast(text) {
-            const toast = document.getElementById('toast')
-            toast.textContent = text
-            toast.style.display = 'block'
-            setTimeout(() => toast.style.display = 'none', 2000)
+                prompt('请手动复制以下链接', link);
+            });
         }
     </script>
 </body>
